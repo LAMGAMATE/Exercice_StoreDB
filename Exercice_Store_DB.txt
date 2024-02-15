@@ -1,0 +1,65 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdtest             |
+| centre_formation   |
+| information_schema |
+| mysql              |
+| performance_schema |
+| program            |
+| sys                |
+| test               |
++--------------------+
+8 rows in set (0.19 sec)
+
+mysql> create database entreprise_de_ventre ;
+Query OK, 1 row affected (0.14 sec)
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| bdtest               |
+| centre_formation     |
+| entreprise_de_ventre |
+| information_schema   |
+| mysql                |
+| performance_schema   |
+| program              |
+| sys                  |
+| test                 |
++----------------------+
+9 rows in set (0.00 sec)
+
+mysql> use entreprise_de_ventre ;
+Database changed
+
+mysql> create table client (id_client int(10),nom varchar(10),prenom varchar(15),email varchar(16),adresse varchar(20),telephone int(15));
+Query OK, 0 rows affected, 2 warnings (0.86 sec)
+
+mysql> create table produits (id_produits int(15),nom varchar(10),prix varchar(1000));
+Query OK, 0 rows affected, 1 warning (0.93 sec)
+
+mysql> create table Commandes (id_commande int(15),id_client int(10),date_commande varchar(15),statut varchar(),total varchar(16));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '),total varchar(16))' at line 1
+mysql> create table Commandes (id_commande int(15),id_client int(10),date_commande varchar(15),statut varchar(15),total varchar(16));
+Query OK, 0 rows affected, 2 warnings (0.36 sec)
+
+mysql> show tables;
++--------------------------------+
+| Tables_in_entreprise_de_ventre |
++--------------------------------+
+| client                         |
+| commandes                      |
+| produits                       |
++--------------------------------+
+3 rows in set (0.09 sec)
+
+mysql> alter table commandes add constraint chk_statut check (statut IN ('en cours', 'livrée', 'annulée'));
+Query OK, 0 rows affected (1.34 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Commandes alter column statut set default 'en cours';
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
